@@ -1,0 +1,23 @@
+{
+  "name": "golang-pointers-experiment",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "main",
+  "workspaceFolder": "/workspace",
+  "settings": {
+    "go.toolsManagement.checkForUpdates": "local",
+    "go.useLanguageServer": true,
+    "go.gopath": "/go",
+    "go.goroot": "/usr/local/go",
+    "gopls": {
+      "build.experimentalWorkspaceModule": true
+    }
+  },
+  "extensions": [
+    "golang.Go",
+    "github.copilot",
+    "dbaeumer.vscode-eslint"
+  ],
+  "features": {
+    "docker-in-docker": "latest"
+  }
+}
