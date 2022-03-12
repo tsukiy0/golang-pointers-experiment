@@ -102,6 +102,64 @@ func (s *HelloSuite) TestUninitialisedSlicesAreNil() {
 	s.Assert().Nil(a)
 }
 
+func (s *HelloSuite) TestModifySliceByIndex() {
+	a := []int{1, 1}
+
+	modify := func(i []int) {
+		i[0] = 2
+		i[1] = 2
+		s.Assert().Equal(a, i)
+	}
+
+	modify(a)
+
+	s.Assert().Equal([]int{2, 2}, a)
+}
+
+func (s *HelloSuite) TestAppendToSliceAfter() {
+	a := []int{1, 1}
+
+	modify := func(i []int) {
+		i[0] = 2
+		i[1] = 2
+		s.Assert().Equal(a, i)
+		i = append(i, 3)
+		s.Assert().NotEqual(a, i)
+	}
+
+	modify(a)
+
+	s.Assert().Equal([]int{2, 2}, a)
+}
+
+func (s *HelloSuite) TestAppendToSliceBefore() {
+	a := []int{1, 1}
+
+	modify := func(i []int) {
+		i = append(i, 3)
+		s.Assert().NotEqual(a, i)
+		i[0] = 2
+		i[1] = 2
+	}
+
+	modify(a)
+
+	s.Assert().Equal([]int{1, 1}, a)
+}
+
+func (s *HelloSuite) TestReturnAppendedSlice() {
+	a := []int{1, 1}
+
+	modify := func(i []int) []int {
+		return append(i, 2)
+	}
+
+	b := modify(a)
+
+	s.Assert().Equal([]int{1, 1}, a)
+	s.Assert().Equal([]int{1, 1, 2}, b)
+}
+
 func TestHelloSuite(t *testing.T) {
 	suite.Run(t, new(HelloSuite))
 }
