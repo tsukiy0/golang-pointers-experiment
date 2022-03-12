@@ -147,6 +147,18 @@ func (s *HelloSuite) TestAppendToSliceBefore() {
 	s.Assert().Equal([]int{1, 1}, a)
 }
 
+func (s *HelloSuite) TestAppendToSlice() {
+	a := []int{1, 1}
+
+	modify := func(i *[]int) {
+		*i = append(*i, 2)
+	}
+
+	modify(&a)
+
+	s.Assert().Equal([]int{1, 1, 2}, a)
+}
+
 func (s *HelloSuite) TestReturnAppendedSlice() {
 	a := []int{1, 1}
 
